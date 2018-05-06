@@ -7,3 +7,12 @@ ul#mode {
     list-style-type: none;
     -webkit-padding-end: 40px;
 }
+
+ul#mode > li.form-group > div.input-group:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+ul#mode > li.form-group > div.input-group > label.input-group-addon {
+    min-width: 8em;
+    text-align: left;
+}
