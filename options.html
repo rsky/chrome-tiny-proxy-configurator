@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="options.css" />
+    <script type="application/javascript" src="options.js"></script>
 </head>
 <body>
 <h1>Proxy Configuration</h1>
@@ -19,19 +20,21 @@
         <label for="mode_auto_detect">Auto Detect</label>
     </li>
     <li class="form-group">
-        <input type="radio" name="mode" value="pac_script/url" id="mode_pac_script_url" />
+        <input type="radio" name="mode" value="pac_script" id="mode_pac_script_url" />
         <label for="mode_pac_script_url">PAC Script URL</label>
         <input type="text" placeholder="specify a URL of the PAC script" name="pac_url" id="pac_url" class="form-control" />
     </li>
     <li class="form-group">
-        <input type="radio" name="mode" value="pac_script/data" id="mode_pac_script_data" />
+        <input type="radio" name="mode" value="pac_script" id="mode_pac_script_data" />
         <label for="mode_pac_script_data">PAC Script Data</label>
         <textarea rows="5" placeholder="specify a data of the PAC script" name="pac_data" id="pac_data" class="form-control"></textarea>
     </li>
     <li class="form-group">
         <input type="radio" name="mode" value="fixed_servers" id="mode_fixed_servers" />
         <label for="mode_fixed_servers">Fixed Server</label>
-        <input type="text" placeholder="specify a proxy server" name="fixed_server" id="fixed_server" class="form-control" />
+        <input type="text" placeholder="specify a HTTP proxy server" name="http_proxy" id="http_proxy" class="form-control" />
+        <input type="text" placeholder="specify a HTTPS proxy server" name="https_proxy" id="https_proxy" class="form-control" />
+        <input type="text" placeholder="space separated list of the hosts to bypass the proxy" name="bypass_list" id="bypass_list" class="form-control" />
     </li>
     <li class="form-group">
         <input type="radio" name="mode" value="system" id="mode_system" />

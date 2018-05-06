@@ -3,14 +3,9 @@
   "version": "1.0",
   "description": "A tiny and simple proxy configurator.",
   "permissions": [
-    "proxy"
+    "proxy",
+    "storage"
   ],
-  "background": {
-    "scripts": [
-      "pac.js"
-    ],
-    "persistent": false
-  },
   "options_page": "options.html",
   "manifest_version": 2
 }
