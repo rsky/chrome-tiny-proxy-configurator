@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pacData: document.getElementById('pac_data'),
     httpProxy: document.getElementById('http_proxy'),
     httpsProxy: document.getElementById('https_proxy'),
+    ftpProxy: document.getElementById('ftp_proxy'),
     bypassList: document.getElementById('bypass_list'),
   }
 
@@ -48,25 +49,36 @@ document.addEventListener('DOMContentLoaded', () => {
   function handleFixedServers(options, proxySettings) {
     if (modes.fixedServers.checked) {
       proxySettings.rules = {}
-      if (options.httpProxy) {
-        const proxyForHttp = parseProxyRule(options.httpProxy)
-        if (proxyForHttp) {
-          proxySettings.rules.proxyForHttp = proxyForHttp
-        } else {
-          window.alert('HTTP Proxy\'s URL is invalid.')
-          return false
-        }
-      }
 
-      if (options.httpsProxy) {
-        const proxyForHttps = parseProxyRule(options.httpsProxy)
-        if (proxyForHttps) {
-          proxySettings.rules.proxyForHttps = proxyForHttps
-        } else {
-          window.alert('HTTPS Proxy\'s URL is invalid.')
-          return false
+      const ruleSet = [
+        {
+          protocol: 'HTTP',
+          key: 'httpProxy',
+          ruleKey: 'proxyForHttp',
+        },
+        {
+          protocol: 'HTTPS',
+          key: 'httpsProxy',
+          ruleKey: 'proxyForHttps',
+        },
+        {
+          protocol: 'FTP',
+          key: 'ftpProxy',
+          ruleKey: 'proxyForFtp',
+        },
+      ]
+
+      ruleSet.forEach(({ protocol, key, ruleKey }) => {
+        if (options[key]) {
+          const rule = parseProxyRule(options[key])
+          if (rule) {
+            proxySettings.rules[ruleKey] = rule
+          } else {
+            window.alert(`${protocol} Proxy's URL is not valid.`)
+            return false
+          }
         }
-      }
+      })
 
       const bypassList = options.bypassList.split(/\s+/).filter(host => host.length > 0)
       if (bypassList.length > 0) {
@@ -118,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, () => {})
 
       // save, do not synchronize, use local storage
-      chrome.storage.local.set({ options, proxySettings })
+      chrome.storage.local.set({ options, proxySettings }, () => {})
 
       return true
     } catch (e) {
