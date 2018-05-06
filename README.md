@@ -1,2 +1,4 @@
-# chrome-tiny-proxy-configurator
-A tiny and simple proxy configurator.
+# Tiny Proxy Configurator
+A tiny and simple proxy configurator for Google Chrome.
+
+![options](readme/options.png)
