@@ -31,14 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handlePACScript(options, proxySettings) {
     if (modes.pacScriptUrl.checked) {
-      options.pac = 'url'
       proxySettings.pacScript = {
         url: options.pacUrl,
       }
     }
 
     if (modes.pacScriptData.checked) {
-      options.pac = 'data'
       proxySettings.pacScript = {
         data: options.pacData
       }
@@ -134,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ev.preventDefault()
 
     // 'system' is a fallback
-    const options = { mode: 'system', pac: null }
+    const options = { mode: 'system' }
     const proxySettings = { mode: 'system' }
 
     Object.entries(modes).forEach(([key, element]) => {
