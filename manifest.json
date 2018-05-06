@@ -1,0 +1,15 @@
+{
+  "name": "Tiny Proxy Configurator",
+  "version": "1.0",
+  "description": "A tiny and simple proxy configurator.",
+  "permissions": [
+    "proxy"
+  ],
+  "background": {
+    "scripts": [
+      "pac.js"
+    ],
+    "persistent": false
+  },
+  "manifest_version": 2
+}
