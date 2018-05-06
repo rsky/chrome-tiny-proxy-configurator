@@ -4,9 +4,7 @@ function setUp(arg) {
     chrome.proxy.settings.set({
       value: proxySettings,
       scope: 'regular',
-    }, () => {
-      console.log('setup', proxySettings, arg)
-    })
+    }, () => {})
   })
 }
 
