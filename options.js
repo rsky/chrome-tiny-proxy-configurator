@@ -74,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // without scheme
     const m = urlString.trim().match(/^([0-9A-Za-z_\-.:]+?)(:[1-9][0-9]*)?$/)
     if (m) {
-      console.log(m)
       rule.host = m[1]
       if (m[2]) {
         rule.port = Math.round(parseInt(m[2].slice(1)))
@@ -142,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return false
     }
 
-    console.log('save', options, proxySettings)
     return saveAndApply(options, proxySettings)
   }
 })
