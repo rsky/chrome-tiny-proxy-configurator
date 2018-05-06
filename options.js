@@ -16,7 +16,18 @@ document.addEventListener('DOMContentLoaded', () => {
     bypassList: document.getElementById('bypass_list'),
   }
 
+  // load data
+  chrome.storage.local.get(['options'], result => {
+    const options = result.options || {}
+    const mode = options.mode || 'system'
+    if (modes[mode]) {
+      modes[mode].checked = true
+    }
 
+    Object.entries(inputs).forEach(([key, element]) => {
+      element.value = options[key] || ''
+    })
+  })
 
   function handlePACScript(options, proxySettings) {
     if (modes.pacScriptUrl.checked) {
@@ -122,12 +133,14 @@ document.addEventListener('DOMContentLoaded', () => {
   apply.onclick = ev => {
     ev.preventDefault()
 
-    const options = { pac: null }
-    const proxySettings = { mode: 'system' } // 'system' is a fallback
+    // 'system' is a fallback
+    const options = { mode: 'system', pac: null }
+    const proxySettings = { mode: 'system' }
 
-    Object.values(modes).forEach(mode => {
-      if (mode.checked) {
-        proxySettings.mode = mode.value
+    Object.entries(modes).forEach(([key, element]) => {
+      if (element.checked) {
+        options.mode = key
+        proxySettings.mode = element.value
       }
     })
 
