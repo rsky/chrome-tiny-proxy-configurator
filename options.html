@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proxy Configuration | Tiny Proxy Configurator</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+<h1>Proxy Configuration</h1>
+<ul id="mode">
+    <li class="form-group">
+        <input type="radio" name="mode" value="direct" id="mode_direct" />
+        <label for="mode_direct">Direct</label>
+    </li>
+    <li class="form-group">
+        <input type="radio" name="mode" value="auto_detect" id="mode_auto_detect" />
+        <label for="mode_auto_detect">Auto Detect</label>
+    </li>
+    <li class="form-group">
+        <input type="radio" name="mode" value="pac_script/url" id="mode_pac_script_url" />
+        <label for="mode_pac_script_url">PAC Script URL</label>
+        <input type="text" placeholder="specify a URL of the PAC script" name="pac_url" id="pac_url" class="form-control" />
+    </li>
+    <li class="form-group">
+        <input type="radio" name="mode" value="pac_script/data" id="mode_pac_script_data" />
+        <label for="mode_pac_script_data">PAC Script Data</label>
+        <textarea rows="5" placeholder="specify a data of the PAC script" name="pac_data" id="pac_data" class="form-control"></textarea>
+    </li>
+    <li class="form-group">
+        <input type="radio" name="mode" value="fixed_servers" id="mode_fixed_servers" />
+        <label for="mode_fixed_servers">Fixed Server</label>
+        <input type="text" placeholder="specify a proxy server" name="fixed_server" id="fixed_server" class="form-control" />
+    </li>
+    <li class="form-group">
+        <input type="radio" name="mode" value="system" id="mode_system" />
+        <label for="mode_system">System</label>
+    </li>
+</ul>
+<div id="footer">
+    <button class="btn btn-default btn-md" id="apply">Apply</button>
+</div>
+</body>
+</html>

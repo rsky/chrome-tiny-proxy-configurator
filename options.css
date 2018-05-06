@@ -1,0 +1,9 @@
+h1, div#footer {
+    -webkit-padding-start: 40px;
+    -webkit-padding-end: 40px;
+}
+
+ul#mode {
+    list-style-type: none;
+    -webkit-padding-end: 40px;
+}
