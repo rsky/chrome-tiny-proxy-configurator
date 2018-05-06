@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     bypassList: document.getElementById('bypass_list'),
   }
 
+
+
   function handlePACScript(options, proxySettings) {
     if (modes.pacScriptUrl.checked) {
       options.pac = 'url'
@@ -101,11 +103,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function saveAndApply(options, proxySettings) {
     try {
+      // configure proxy
       chrome.proxy.settings.set({
         value: proxySettings,
         scope: 'regular',
       }, () => {})
-      chrome.storage.sync.set({ options, proxySettings })
+
+      // save, do not synchronize, use local storage
+      chrome.storage.local.set({ options, proxySettings })
+
       return true
     } catch (e) {
       window.alert(e.message)
