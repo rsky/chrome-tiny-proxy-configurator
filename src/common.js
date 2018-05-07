@@ -11,7 +11,7 @@ function updateBadgeText(proxyConfig) {
     auto_detect: 'A',
     pac_script: 'PAC',
     fixed_servers: 'F',
-    system: 'S',
+    system: '',
   })[proxyConfig.mode] || ''
 
   chrome.browserAction.setBadgeText({ text })
