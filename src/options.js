@@ -120,15 +120,15 @@ export function handleFixedServers(options, proxySettings) {
 export function parseProxyRule(urlString) {
   const rule = {}
 
-  const v4pattern = /^(?:(https?|quic|socks[45]):\/\/)?([0-9A-Za-z_\-.]+)(?::([1-9][0-9]*))?(?:\/|$)/
-  const v6pattern = /^(?:(https?|quic|socks[45]):\/\/)?\[([0-9A-Fa-f:]+)](?::([1-9][0-9]*))?(?:\/|$)/
+  const v4pattern = /^(?:(https?|quic|socks[45]):\/\/)?([0-9A-Za-z_\-.]+)(?::([1-9][0-9]*))?$/i
+  const v6pattern = /^(?:(https?|quic|socks[45]):\/\/)?\[([0-9A-Fa-f:]+)](?::([1-9][0-9]*))?$/i
 
   for (const pattern of [v6pattern, v4pattern]) {
     const m = urlString.match(pattern)
     if (m) {
-      const rule = { host: m[2] }
+      const rule = { host: m[2].toLowerCase() }
       if (m[1]) {
-        rule.scheme = m[1]
+        rule.scheme = m[1].toLowerCase()
       }
       if (m[3]) {
         rule.port = Math.round(parseInt(m[3]))

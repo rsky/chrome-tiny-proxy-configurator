@@ -29,11 +29,14 @@ describe('parseProxyRule', () => {
     })
   })
 
-  it('should success with IPv4 URL ends with slash', () => {
-    expect(parseProxyRule('http://127.0.0.1:8888/')).toEqual({
-      scheme: 'http',
-      host: '127.0.0.1',
-      port: 8888,
+  it('should fail with IPv4 URL ends with slash', () => {
+    expect(parseProxyRule('http://127.0.0.1:8888/')).toBeNull()
+  })
+
+  it('should convert to lowercase with IPv4 hostname and scheme', () => {
+    expect(parseProxyRule('SOCKS4://LocalHost')).toEqual({
+      scheme: 'socks4',
+      host: 'localhost',
     })
   })
 
@@ -65,13 +68,23 @@ describe('parseProxyRule', () => {
     })
   })
 
-  it('should success with IPv6 URL ends with slash', () => {
-    expect(parseProxyRule('http://[::1]:8888/')).toEqual({
-      scheme: 'http',
-      host: '::1',
-      port: 8888,
+  it('should fail with IPv6 URL ends with slash', () => {
+    expect(parseProxyRule('http://[::1]:8888/')).toBeNull()
+  })
+
+  it('should convert to lowercase IPv6 hostname and scheme', () => {
+    expect(parseProxyRule('SOCKS5://[2001:DB8:85A3:8D3:1319:8A2E:370:7348]')).toEqual({
+      scheme: 'socks5',
+      host: '2001:db8:85a3:8d3:1319:8a2e:370:7348',
     })
   })
+
+  const allSchemes = ['http', 'https', 'quic', 'socks4', 'socks5']
+  for (const scheme of allSchemes) {
+    it(`should success with ${scheme} scheme`, () => {
+      expect(parseProxyRule(`${scheme}://127.0.0.1`)).not.toBeNull()
+    })
+  }
 
   it('should fail with unsupported scheme', () => {
     expect(parseProxyRule('unknown://127.0.0.1')).toBeNull()
