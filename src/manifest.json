@@ -7,8 +7,14 @@
     "storage"
   ],
   "background": {
-    "scripts": ["background.js"],
+    "scripts": [
+      "badge.js",
+      "background.js"
+    ],
     "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "images/icon32.png"
   },
   "options_page": "options.html",
   "manifest_version": 2

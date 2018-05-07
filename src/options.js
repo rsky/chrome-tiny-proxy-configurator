@@ -146,7 +146,7 @@ function saveAndApply(options, proxySettings) {
     chrome.proxy.settings.set({
       value: proxySettings,
       scope: 'regular',
-    }, () => {})
+    }, () => updateBadgeText(proxySettings))
 
     // save, do not synchronize, use local storage
     chrome.storage.local.set({ options, proxySettings }, () => {})
