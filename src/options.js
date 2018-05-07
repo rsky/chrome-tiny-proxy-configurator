@@ -143,12 +143,9 @@ export function parseProxyRule(urlString) {
 function saveAndApply(options, proxyConfig) {
   try {
     // configure proxy
-    chrome.proxy.settings.set({
-      value: proxyConfig,
-      scope: 'regular',
-    }, () => updateBadgeText(proxyConfig))
+    setProxyConfig(proxyConfig)
 
-    // save, do not synchronize, use local storage
+    // do not sync, use local storage
     chrome.storage.local.set({ options, proxyConfig }, () => {})
 
     return true

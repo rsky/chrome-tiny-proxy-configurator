@@ -8,7 +8,7 @@
   ],
   "background": {
     "scripts": [
-      "badge.js",
+      "common.js",
       "background.js"
     ],
     "persistent": false

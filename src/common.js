@@ -1,3 +1,10 @@
+function setProxyConfig(proxyConfig) {
+  chrome.proxy.settings.set({
+    value: proxyConfig,
+    scope: 'regular',
+  }, () => updateBadgeText(proxyConfig))
+}
+
 function updateBadgeText(proxyConfig) {
   const text = ({
     direct: 'D',
