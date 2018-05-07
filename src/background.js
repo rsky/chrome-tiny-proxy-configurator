@@ -1,10 +1,10 @@
 function setUp() {
-  chrome.storage.local.get(['proxySettings'], result => {
-    const proxySettings = result.proxySettings || { mode: 'system' }
+  chrome.storage.local.get(['proxyConfig'], result => {
+    const proxyConfig = result.proxyConfig || { mode: 'system' }
     chrome.proxy.settings.set({
-      value: proxySettings,
+      value: proxyConfig,
       scope: 'regular',
-    }, () => updateBadgeText(proxySettings))
+    }, () => updateBadgeText(proxyConfig))
   })
 }
 

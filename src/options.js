@@ -35,12 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 'system' is a fallback
     const options = { mode: 'system' }
-    const proxySettings = { mode: 'system' }
+    const proxyConfig = { mode: 'system' }
 
     Object.entries(modes).forEach(([key, element]) => {
       if (element.checked) {
         options.mode = key
-        proxySettings.mode = element.value
+        proxyConfig.mode = element.value
       }
     })
 
@@ -48,25 +48,25 @@ document.addEventListener('DOMContentLoaded', () => {
       options[key] = element.value.trim()
     })
 
-    handlePACScript(options, proxySettings)
+    handlePACScript(options, proxyConfig)
 
-    if (!handleFixedServers(options, proxySettings)) {
+    if (!handleFixedServers(options, proxyConfig)) {
       return false
     }
 
-    return saveAndApply(options, proxySettings)
+    return saveAndApply(options, proxyConfig)
   }
 })
 
-export function handlePACScript(options, proxySettings) {
+export function handlePACScript(options, proxyConfig) {
   if (options.mode === 'pacScriptUrl') {
-    proxySettings.pacScript = {
+    proxyConfig.pacScript = {
       url: options.pacUrl,
     }
   }
 
   if (options.mode === 'pacScriptData') {
-    proxySettings.pacScript = {
+    proxyConfig.pacScript = {
       data: options.pacData,
     }
   }
@@ -74,9 +74,9 @@ export function handlePACScript(options, proxySettings) {
   return true
 }
 
-export function handleFixedServers(options, proxySettings) {
+export function handleFixedServers(options, proxyConfig) {
   if (options.mode === 'fixedServers') {
-    proxySettings.rules = {}
+    proxyConfig.rules = {}
 
     const ruleSet = [
       {
@@ -100,7 +100,7 @@ export function handleFixedServers(options, proxySettings) {
       if (options[key]) {
         const rule = parseProxyRule(options[key])
         if (rule) {
-          proxySettings.rules[ruleKey] = rule
+          proxyConfig.rules[ruleKey] = rule
         } else {
           window.alert(`${protocol} Proxy's URL is not valid.`)
           return false
@@ -110,7 +110,7 @@ export function handleFixedServers(options, proxySettings) {
 
     const bypassList = options.bypassList.split(/\s+/).filter(host => host.length > 0)
     if (bypassList.length > 0) {
-      proxySettings.rules.bypassList = bypassList
+      proxyConfig.rules.bypassList = bypassList
     }
   }
 
@@ -140,16 +140,16 @@ export function parseProxyRule(urlString) {
   return null
 }
 
-function saveAndApply(options, proxySettings) {
+function saveAndApply(options, proxyConfig) {
   try {
     // configure proxy
     chrome.proxy.settings.set({
-      value: proxySettings,
+      value: proxyConfig,
       scope: 'regular',
-    }, () => updateBadgeText(proxySettings))
+    }, () => updateBadgeText(proxyConfig))
 
     // save, do not synchronize, use local storage
-    chrome.storage.local.set({ options, proxySettings }, () => {})
+    chrome.storage.local.set({ options, proxyConfig }, () => {})
 
     return true
   } catch (e) {
