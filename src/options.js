@@ -30,117 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
 
-  function handlePACScript(options, proxySettings) {
-    if (modes.pacScriptUrl.checked) {
-      proxySettings.pacScript = {
-        url: options.pacUrl,
-      }
-    }
-
-    if (modes.pacScriptData.checked) {
-      proxySettings.pacScript = {
-        data: options.pacData
-      }
-    }
-
-    return true
-  }
-
-  function handleFixedServers(options, proxySettings) {
-    if (modes.fixedServers.checked) {
-      proxySettings.rules = {}
-
-      const ruleSet = [
-        {
-          protocol: 'HTTP',
-          key: 'httpProxy',
-          ruleKey: 'proxyForHttp',
-        },
-        {
-          protocol: 'HTTPS',
-          key: 'httpsProxy',
-          ruleKey: 'proxyForHttps',
-        },
-        {
-          protocol: 'FTP',
-          key: 'ftpProxy',
-          ruleKey: 'proxyForFtp',
-        },
-      ]
-
-      ruleSet.forEach(({ protocol, key, ruleKey }) => {
-        if (options[key]) {
-          const rule = parseProxyRule(options[key])
-          if (rule) {
-            proxySettings.rules[ruleKey] = rule
-          } else {
-            window.alert(`${protocol} Proxy's URL is not valid.`)
-            return false
-          }
-        }
-      })
-
-      const bypassList = options.bypassList.split(/\s+/).filter(host => host.length > 0)
-      if (bypassList.length > 0) {
-        proxySettings.rules.bypassList = bypassList
-      }
-    }
-
-    return true
-  }
-
-  function parseProxyRule(urlString) {
-    const rule = {}
-
-    // without scheme
-    const m = urlString.trim().match(/^([0-9A-Za-z_\-.:]+?)(:[1-9][0-9]*)?$/)
-    if (m) {
-      rule.host = m[1]
-      if (m[2]) {
-        rule.port = Math.round(parseInt(m[2].slice(1)))
-      }
-      return rule
-    }
-
-    // with scheme
-    try {
-      const url = new URL(urlString)
-      if (!url.hostname) {
-        return null
-      }
-      rule.host = url.hostname
-      if (url.protocol) {
-        rule.scheme = url.protocol.slice(0, url.protocol.length - 1)
-      }
-      if (url.port) {
-        rule.port = Math.round(parseInt(url.port))
-      }
-      return rule
-    } catch (e) {
-      return null
-    }
-  }
-
-  function saveAndApply(options, proxySettings) {
-    try {
-      // configure proxy
-      chrome.proxy.settings.set({
-        value: proxySettings,
-        scope: 'regular',
-      }, () => {})
-
-      // save, do not synchronize, use local storage
-      chrome.storage.local.set({ options, proxySettings }, () => {})
-
-      return true
-    } catch (e) {
-      window.alert(e.message)
-      return false
-    }
-  }
-
-  const apply = document.getElementById('apply')
-  apply.onclick = ev => {
+  document.getElementById('apply').onclick = ev => {
     ev.preventDefault()
 
     // 'system' is a fallback
@@ -155,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     Object.entries(inputs).forEach(([key, element]) => {
-      options[key] = element.value
+      options[key] = element.value.trim()
     })
 
     handlePACScript(options, proxySettings)
@@ -167,3 +57,103 @@ document.addEventListener('DOMContentLoaded', () => {
     return saveAndApply(options, proxySettings)
   }
 })
+
+export function handlePACScript(options, proxySettings) {
+  if (options.mode === 'pacScriptUrl') {
+    proxySettings.pacScript = {
+      url: options.pacUrl,
+    }
+  }
+
+  if (options.mode === 'pacScriptData') {
+    proxySettings.pacScript = {
+      data: options.pacData,
+    }
+  }
+
+  return true
+}
+
+export function handleFixedServers(options, proxySettings) {
+  if (options.mode === 'fixedServers') {
+    proxySettings.rules = {}
+
+    const ruleSet = [
+      {
+        protocol: 'HTTP',
+        key: 'httpProxy',
+        ruleKey: 'proxyForHttp',
+      },
+      {
+        protocol: 'HTTPS',
+        key: 'httpsProxy',
+        ruleKey: 'proxyForHttps',
+      },
+      {
+        protocol: 'FTP',
+        key: 'ftpProxy',
+        ruleKey: 'proxyForFtp',
+      },
+    ]
+
+    ruleSet.forEach(({ protocol, key, ruleKey }) => {
+      if (options[key]) {
+        const rule = parseProxyRule(options[key])
+        if (rule) {
+          proxySettings.rules[ruleKey] = rule
+        } else {
+          window.alert(`${protocol} Proxy's URL is not valid.`)
+          return false
+        }
+      }
+    })
+
+    const bypassList = options.bypassList.split(/\s+/).filter(host => host.length > 0)
+    if (bypassList.length > 0) {
+      proxySettings.rules.bypassList = bypassList
+    }
+  }
+
+  return true
+}
+
+export function parseProxyRule(urlString) {
+  const rule = {}
+
+  const v4pattern = /^(?:(https?|quic|socks[45]):\/\/)?([0-9A-Za-z_\-.]+)(?::([1-9][0-9]*))?(?:\/|$)/
+  const v6pattern = /^(?:(https?|quic|socks[45]):\/\/)?\[([0-9A-Fa-f:]+)](?::([1-9][0-9]*))?(?:\/|$)/
+
+  for (const pattern of [v6pattern, v4pattern]) {
+    const m = urlString.match(pattern)
+    if (m) {
+      const rule = { host: m[2] }
+      if (m[1]) {
+        rule.scheme = m[1]
+      }
+      if (m[3]) {
+        rule.port = Math.round(parseInt(m[3]))
+      }
+      return rule
+    }
+  }
+
+  return null
+}
+
+function saveAndApply(options, proxySettings) {
+  try {
+    // configure proxy
+    chrome.proxy.settings.set({
+      value: proxySettings,
+      scope: 'regular',
+    }, () => {})
+
+    // save, do not synchronize, use local storage
+    chrome.storage.local.set({ options, proxySettings }, () => {})
+
+    return true
+  } catch (e) {
+    window.alert(e.message)
+    return false
+  }
+}
