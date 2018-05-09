@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // load data
-  chrome.storage.local.get(['options'], result => {
+  loadData(['options'], result => {
     const options = result.options || {}
     const mode = options.mode || 'system'
     if (modes[mode]) {
@@ -50,11 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     handlePACScript(options, proxyConfig)
 
-    if (!handleFixedServers(options, proxyConfig)) {
-      return false
+    if (handleFixedServers(options, proxyConfig)) {
+      saveAndApply(options, proxyConfig)
     }
-
-    return saveAndApply(options, proxyConfig)
   }
 })
 
@@ -141,16 +139,15 @@ export function parseProxyRule(urlString) {
 }
 
 function saveAndApply(options, proxyConfig) {
-  try {
-    // configure proxy
-    setProxyConfig(proxyConfig)
+  loadData(['options'], result => {
+    try {
+      if (options.enabled !== false) {
+        setProxyConfig(proxyConfig)
+      }
 
-    // do not sync, use local storage
-    chrome.storage.local.set({ options, proxyConfig }, () => {})
-
-    return true
-  } catch (e) {
-    window.alert(e.message)
-    return false
-  }
+      saveData({ options, proxyConfig })
+    } catch (e) {
+      window.alert(e.message)
+    }
+  })
 }

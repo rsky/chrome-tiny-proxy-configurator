@@ -1,6 +1,8 @@
 function setUp() {
-  chrome.storage.local.get(['proxyConfig'], result => {
-    setProxyConfig(result.proxyConfig || { mode: 'system' })
+  loadData(['proxyConfig', 'enabled'], result => {
+    if (result.enabled !== false) {
+      setProxyConfig(result.proxyConfig || { mode: 'system' })
+    }
   })
 }
 
