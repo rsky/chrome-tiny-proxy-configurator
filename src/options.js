@@ -17,6 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
     bypassList: document.getElementById('bypass_list'),
   }
 
+  const handleFileSelect = handleFileSelectFactory(inputs.pacData)
+  document.getElementById('pac_file').addEventListener('change', handleFileSelect, false)
+  inputs.pacData.addEventListener('dragover', handleDragOver, false)
+  inputs.pacData.addEventListener('drop', handleFileSelect, false)
+
   // load data
   loadData(['options'], result => {
     const options = result.options || {}
@@ -150,4 +155,26 @@ function saveAndApply(options, proxyConfig) {
       window.alert(e.message)
     }
   })
+}
+
+function handleDragOver(ev) {
+  ev.stopPropagation()
+  ev.preventDefault()
+  ev.dataTransfer.dropEffect = 'copy'
+}
+
+function handleFileSelectFactory(input) {
+  return ev => {
+    ev.stopPropagation()
+    ev.preventDefault()
+
+    const files = (ev.dataTransfer || ev.target).files
+    if (files && files[0]) {
+      const reader = new FileReader()
+      reader.onload = e => {
+        input.value = e.target.result
+      }
+      reader.readAsText(files[0])
+    }
+  }
 }

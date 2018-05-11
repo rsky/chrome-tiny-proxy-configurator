@@ -22,27 +22,28 @@
     <li class="form-group">
         <input type="radio" name="mode" value="pac_script" id="mode_pac_script_url" />
         <label for="mode_pac_script_url">PAC Script URL</label>
-        <input type="text" placeholder="specify a URL of the PAC script" name="pac_url" id="pac_url" class="form-control" />
+        <input type="text" placeholder="e.g. https://example.com/proxy.pac" name="pac_url" id="pac_url" class="form-control" />
     </li>
     <li class="form-group">
         <input type="radio" name="mode" value="pac_script" id="mode_pac_script_data" />
         <label for="mode_pac_script_data">PAC Script Data</label>
-        <textarea rows="5" placeholder="specify a data of the PAC script" name="pac_data" id="pac_data" class="form-control"></textarea>
+        <textarea rows="5" placeholder="drop or input the PAC script" name="pac_data" id="pac_data" class="form-control"></textarea>
+        <input type="file" id="pac_file" class="form-control" />
     </li>
     <li class="form-group">
         <input type="radio" name="mode" value="fixed_servers" id="mode_fixed_servers" />
         <label for="mode_fixed_servers">Fixed Servers</label>
         <div class="input-group">
             <label for="http_proxy" class="input-group-addon">HTTP Proxy</label>
-            <input type="text" placeholder="specify a HTTP proxy server" name="http_proxy" id="http_proxy" class="form-control" />
+            <input type="text" placeholder="e.g. 127.0.0.1:8080" name="http_proxy" id="http_proxy" class="form-control" />
         </div>
         <div class="input-group">
             <label for="https_proxy" class="input-group-addon">HTTPS Proxy</label>
-            <input type="text" placeholder="specify a HTTPS proxy server" name="https_proxy" id="https_proxy" class="form-control" />
+            <input type="text" placeholder="e.g. 127.0.0.1:8443" name="https_proxy" id="https_proxy" class="form-control" />
         </div>
         <div class="input-group">
             <label for="ftp_proxy" class="input-group-addon">FTP Proxy</label>
-            <input type="text" placeholder="specify a FTP proxy server" name="ftp_proxy" id="ftp_proxy" class="form-control" />
+            <input type="text" placeholder="e.g. 127.0.0.1:8021" name="ftp_proxy" id="ftp_proxy" class="form-control" />
         </div>
         <div class="input-group">
             <label for="bypass_list" class="input-group-addon">Bypass List</label>
