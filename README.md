@@ -56,3 +56,7 @@ foobar.com *foobar.com *.foobar.com *foobar.com:99 https://x.*.y.com:99
 [MIT License](LICENSE)
 
 Copyright (c) 2018 Ryusuke SEKIYAMA
+
+## Credits
+
+This software contains icons provided by [Font Awesome](https://fontawesome.com/) licensed as [CC BY 4.0](https://fontawesome.com/license).

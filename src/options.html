@@ -27,8 +27,14 @@
     <li class="form-group">
         <input type="radio" name="mode" value="pac_script" id="mode_pac_script_data" />
         <label for="mode_pac_script_data">PAC Script Data</label>
-        <textarea rows="5" placeholder="drop or input the PAC script" name="pac_data" id="pac_data" class="form-control"></textarea>
-        <input type="file" id="pac_file" class="form-control" />
+        <textarea rows="5" placeholder="" name="pac_data" id="pac_data" class="form-control"></textarea>
+        <input accept=".txt,.pac,.js" type="file" id="pac_file" />
+        <div id="pac_drop">
+            <label class="pac-file-label" for="pac_file">
+                <img src="fa/copy.svg" width="18" height="18" class="fa-icon"/>
+                Drop, select or input the PAC Script
+            </label>
+        </div>
     </li>
     <li class="form-group">
         <input type="radio" name="mode" value="fixed_servers" id="mode_fixed_servers" />
@@ -47,7 +53,7 @@
         </div>
         <div class="input-group">
             <label for="bypass_list" class="input-group-addon">Bypass List</label>
-            <input type="text" placeholder="space separated list of the hosts to bypass the proxy" name="bypass_list" id="bypass_list" class="form-control" />
+            <input type="text" placeholder="Space separated list of the hosts to bypass the proxy" name="bypass_list" id="bypass_list" class="form-control" />
         </div>
     </li>
     <li class="form-group">

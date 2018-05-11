@@ -17,10 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
     bypassList: document.getElementById('bypass_list'),
   }
 
-  const handleFileSelect = handleFileSelectFactory(inputs.pacData)
-  document.getElementById('pac_file').addEventListener('change', handleFileSelect, false)
-  inputs.pacData.addEventListener('dragover', handleDragOver, false)
-  inputs.pacData.addEventListener('drop', handleFileSelect, false)
+  const pacData = inputs.pacData
+  const pacDrop = document.getElementById('pac_drop')
+  const pacFile = document.getElementById('pac_file')
+  const handleFileSelect = handleFileSelectFactory(pacData)
+
+  pacData.addEventListener('dragover', handleDragOver, false)
+  pacData.addEventListener('drop', handleFileSelect, false)
+  pacDrop.addEventListener('dragover', handleDragOver, false)
+  pacDrop.addEventListener('drop', handleFileSelect, false)
+  pacFile.addEventListener('change', handleFileSelect, false)
 
   // load data
   loadData(['options'], result => {

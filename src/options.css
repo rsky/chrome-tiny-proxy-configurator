@@ -16,3 +16,26 @@ ul#mode > li.form-group > div.input-group > label.input-group-addon {
     min-width: 8em;
     text-align: left;
 }
+
+#pac_data {
+    border-radius: 4px 4px 0 0;
+}
+
+#pac_file {
+    display: none;
+}
+
+#pac_drop {
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    padding: 4px;
+}
+
+.pac-file-label {
+    cursor: pointer;
+    font-weight: normal;
+}
