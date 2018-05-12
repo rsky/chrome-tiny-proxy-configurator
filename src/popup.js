@@ -1,7 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
   const mode = document.getElementById('mode')
+  const onoff = document.getElementById('onoff')
+  const toggle = document.getElementById('toggle')
   const enabled = document.getElementById('enabled')
   const options = document.getElementById('options')
+
+  function toggleOn() {
+    toggle.className = 'label label-success'
+    onoff.textContent = '| ON'
+  }
+
+  function toggleOff() {
+    toggle.className = 'label label-default'
+    onoff.textContent = '| OFF'
+  }
 
   loadData(['options', 'enabled'], result => {
     mode.textContent = ({
@@ -15,20 +27,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (result.enabled !== false) {
       enabled.checked = true
-      mode.className = 'label label-success'
+      toggleOn()
     } else {
       enabled.checked = false
-      mode.className = 'label label-default'
+      toggleOff()
     }
   })
 
   enabled.onclick = ev => {
     if (ev.target.checked) {
       enableProxyConfig()
-      mode.className = 'label label-success'
+      toggleOn()
     } else {
       disableProxyConfig()
-      mode.className = 'label label-default'
+      toggleOff()
     }
   }
 

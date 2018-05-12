@@ -6,6 +6,6 @@ p {
     white-space: nowrap;
 }
 
-#mode, #options {
+#toggle, #options {
     cursor: pointer;
 }

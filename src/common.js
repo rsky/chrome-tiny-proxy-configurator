@@ -17,7 +17,7 @@ function setProxyConfig(proxyConfig) {
 function clearProxyConfig() {
   chrome.proxy.settings.clear({
     scope: 'regular',
-  }, () => updateBadgeText({}))
+  }, () => updateBadgeText(null))
 }
 
 function enableProxyConfig() {
@@ -33,13 +33,19 @@ function disableProxyConfig() {
 }
 
 function updateBadgeText(proxyConfig) {
-  const text = ({
-    direct: 'D',
-    auto_detect: 'A',
-    pac_script: 'S',
-    fixed_servers: 'F',
-    system: '',
-  })[proxyConfig.mode] || '-'
+  if (proxyConfig) {
+    const text = ({
+      direct: 'D',
+      auto_detect: 'A',
+      pac_script: 'S',
+      fixed_servers: 'F',
+      system: '',
+    })[proxyConfig.mode] || ''
 
-  chrome.browserAction.setBadgeText({ text })
+    chrome.browserAction.setBadgeText({ text })
+    chrome.browserAction.setBadgeBackgroundColor({ color: '#419bf9' })
+  } else {
+    chrome.browserAction.setBadgeText({ text: 'off' })
+    chrome.browserAction.setBadgeBackgroundColor({ color: '#777' })
+  }
 }
