@@ -1,4 +1,10 @@
-h1, div#footer {
+h1 {
+    -webkit-padding-start: 40px;
+    -webkit-padding-end: 40px;
+}
+
+#footer {
+    margin-bottom: 20px;
     -webkit-padding-start: 40px;
     -webkit-padding-end: 40px;
 }
