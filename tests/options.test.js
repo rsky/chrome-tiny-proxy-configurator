@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { handlePACScript, handleFixedServers, parseProxyRule } from '../src/options'
 
 describe('parseProxyRule', () => {
