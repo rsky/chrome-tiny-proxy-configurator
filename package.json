@@ -1,5 +1,5 @@
 {
-  "name": "chroe-tiny-configurator",
+  "name": "chrome-tiny-proxy-configurator",
   "license": "MIT",
   "version": "1.0.1",
   "repository": {
@@ -10,6 +10,7 @@
     "build": "esbuild src/background.js src/options.js src/popup.js --bundle --outdir=dist",
     "build:prod": "npm run build -- --minify",
     "build:watch": "npm run build -- --watch",
+    "package": "npm run build:prod && cp -R dist tiny-proxy-configurator && zip -r tiny-proxy-configurator.zip tiny-proxy-configurator",
     "lint": "eslint src",
     "test": "jest"
   },
