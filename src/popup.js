@@ -1,3 +1,5 @@
+import { disableProxyConfig, enableProxyConfig, loadData } from "./commmon"
+
 document.addEventListener('DOMContentLoaded', () => {
   const mode = document.getElementById('mode')
   const onoff = document.getElementById('onoff')
@@ -44,5 +46,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  options.onclick = ev => chrome.runtime.openOptionsPage()
+  options.onclick = () => chrome.runtime.openOptionsPage()
 })

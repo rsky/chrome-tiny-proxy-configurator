@@ -1,38 +1,38 @@
-function saveData(data, callback = null) {
+export function saveData(data, callback = null) {
   // do not sync, use local storage
   chrome.storage.local.set(data, callback || (() => {}))
 }
 
-function loadData(keys, callback = null) {
+export function loadData(keys, callback = null) {
   chrome.storage.local.get(keys, callback || (() => {}))
 }
 
-function setProxyConfig(proxyConfig) {
+export function setProxyConfig(proxyConfig) {
   chrome.proxy.settings.set({
     value: proxyConfig,
     scope: 'regular',
   }, () => updateBadgeText(proxyConfig))
 }
 
-function clearProxyConfig() {
+export function clearProxyConfig() {
   chrome.proxy.settings.clear({
     scope: 'regular',
   }, () => updateBadgeText(null))
 }
 
-function enableProxyConfig() {
+export function enableProxyConfig() {
   loadData(['proxyConfig'], result => {
     setProxyConfig(result.proxyConfig || { mode: 'system' })
     saveData({ enabled: true })
   })
 }
 
-function disableProxyConfig() {
+export function disableProxyConfig() {
   clearProxyConfig()
   saveData({ enabled: false })
 }
 
-function updateBadgeText(proxyConfig) {
+export function updateBadgeText(proxyConfig) {
   if (proxyConfig) {
     const text = ({
       direct: 'D',

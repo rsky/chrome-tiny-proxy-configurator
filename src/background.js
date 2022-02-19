@@ -1,3 +1,5 @@
+import { loadData, setProxyConfig } from "./common"
+
 function setUp() {
   loadData(['proxyConfig', 'enabled'], result => {
     if (result.enabled !== false) {
@@ -7,4 +9,4 @@ function setUp() {
 }
 
 chrome.runtime.onStartup.addListener(() => setUp())
-chrome.runtime.onInstalled.addListener(details => setUp())
+chrome.runtime.onInstalled.addListener(() => setUp())

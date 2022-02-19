@@ -1,3 +1,5 @@
+import { loadData, saveData, setProxyConfig } from "./common"
+
 document.addEventListener('DOMContentLoaded', () => {
   const modes = {
     direct: document.getElementById('mode_direct'),
@@ -127,10 +129,8 @@ export function handleFixedServers(options, proxyConfig) {
 }
 
 export function parseProxyRule(urlString) {
-  const rule = {}
-
-  const v4pattern = /^(?:(https?|quic|socks[45]):\/\/)?([0-9A-Za-z_\-.]+)(?::([1-9][0-9]*))?$/i
-  const v6pattern = /^(?:(https?|quic|socks[45]):\/\/)?\[([0-9A-Fa-f:]+)](?::([1-9][0-9]*))?$/i
+  const v4pattern = /^(?:(https?|quic|socks[45]):\/\/)?([\w\-.]+)(?::([1-9]\d*))?$/i
+  const v6pattern = /^(?:(https?|quic|socks[45]):\/\/)?\[([\dA-F:]+)\](?::([1-9]\d*))?$/i
 
   for (const pattern of [v6pattern, v4pattern]) {
     const m = urlString.match(pattern)
@@ -150,7 +150,7 @@ export function parseProxyRule(urlString) {
 }
 
 function saveAndApply(options, proxyConfig) {
-  loadData(['options'], result => {
+  loadData(['options'], ()=> {
     try {
       if (options.enabled !== false) {
         setProxyConfig(proxyConfig)

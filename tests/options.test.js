@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { handlePACScript, handleFixedServers, parseProxyRule } from '../src/options'
+import { parseProxyRule } from '../src/options'
 
 describe('parseProxyRule', () => {
   it('should success with IPv4 hostname', () => {
