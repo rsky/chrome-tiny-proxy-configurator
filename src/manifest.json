@@ -2,7 +2,7 @@
   "name": "Tiny Proxy Configurator",
   "description": "A tiny and simple proxy configurator.",
   "version": "1.0",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "icons": {
     "16": "images/icon16.png",
     "48": "images/icon48.png",
@@ -13,13 +13,10 @@
     "storage"
   ],
   "background": {
-    "scripts": [
-      "common.js",
-      "background.js"
-    ],
+    "service_worker": "background.js",
     "persistent": false
   },
-  "browser_action": {
+  "action": {
     "default_icon": {
       "16": "images/icon16.png",
       "24": "images/icon24.png",
