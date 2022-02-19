@@ -1,7 +1,7 @@
 {
   "name": "chroe-tiny-configurator",
   "license": "MIT",
-  "version": "1.0",
+  "version": "1.0.1",
   "repository": {
     "type": "git",
     "url": "git@github.com:rsky/chrome-tiny-proxy-configurator.git"
