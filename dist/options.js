@@ -23,11 +23,11 @@
         fixed_servers: "F",
         system: ""
       }[proxyConfig.mode] || "";
-      chrome.browserAction.setBadgeText({ text });
-      chrome.browserAction.setBadgeBackgroundColor({ color: "#419bf9" });
+      chrome.action.setBadgeText({ text });
+      chrome.action.setBadgeBackgroundColor({ color: "#419bf9" });
     } else {
-      chrome.browserAction.setBadgeText({ text: "off" });
-      chrome.browserAction.setBadgeBackgroundColor({ color: "#777" });
+      chrome.action.setBadgeText({ text: "off" });
+      chrome.action.setBadgeBackgroundColor({ color: "#777" });
     }
   }
 
