@@ -1,4 +1,4 @@
-import { disableProxyConfig, enableProxyConfig, loadData } from "./commmon"
+import { disableProxyConfig, enableProxyConfig, loadData } from "./common"
 
 document.addEventListener('DOMContentLoaded', () => {
   const mode = document.getElementById('mode')

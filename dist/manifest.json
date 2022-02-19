@@ -13,8 +13,7 @@
     "storage"
   ],
   "background": {
-    "service_worker": "background.js",
-    "persistent": false
+    "service_worker": "background.js"
   },
   "action": {
     "default_icon": {

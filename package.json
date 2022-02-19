@@ -7,7 +7,11 @@
     "url": "git@github.com:rsky/chrome-tiny-proxy-configurator.git"
   },
   "scripts": {
-    "lint": "eslint .",
+    "build": "npm run build:background && npm run build:options && npm run build:popup",
+    "build:background": "esbuild src/background.js --bundle --outfile=dist/background.js",
+    "build:options": "esbuild src/options.js --bundle --outfile=dist/options.js",
+    "build:popup": "esbuild src/popup.js --bundle --outfile=dist/popup.js",
+    "lint": "eslint src",
     "test": "jest"
   },
   "jest": {
@@ -15,6 +19,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
+    "esbuild": "^0.14.23",
     "eslint": "^8.9.0",
     "eslint-plugin-jest": "^26.1.1",
     "eslint-plugin-regexp": "^1.5.1",
