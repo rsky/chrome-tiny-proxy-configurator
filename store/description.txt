@@ -1,0 +1,10 @@
+This provides a very simple and minimal proxy configuration method. In addition to specifying the proxy host, you can specify the URL of the PAC script or the PAC script itself.
+
+単一用途の説明
+This extension provides the ability to easily configure the proxy settings.
+
+proxyが必要な理由
+The purpose of this extension is to configure the proxy settings.
+
+storageが必要な理由
+Storage is required to persist the proxy settings entered by the user.
