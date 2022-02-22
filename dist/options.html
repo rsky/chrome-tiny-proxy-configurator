@@ -12,20 +12,20 @@
 <ul id="mode">
     <li class="form-group">
         <input type="radio" name="mode" value="direct" id="mode_direct" />
-        <label for="mode_direct">Direct</label>
+        <label for="mode_direct" class="form-label">Direct</label>
     </li>
     <li class="form-group">
         <input type="radio" name="mode" value="auto_detect" id="mode_auto_detect" />
-        <label for="mode_auto_detect">Auto Detect</label>
+        <label for="mode_auto_detect" class="form-label">Auto Detect</label>
     </li>
     <li class="form-group">
         <input type="radio" name="mode" value="pac_script" id="mode_pac_script_url" />
-        <label for="mode_pac_script_url">PAC Script URL</label>
+        <label for="mode_pac_script_url" class="form-label">PAC Script URL</label>
         <input type="text" placeholder="e.g. https://example.com/proxy.pac" name="pac_url" id="pac_url" class="form-control" />
     </li>
     <li class="form-group">
         <input type="radio" name="mode" value="pac_script" id="mode_pac_script_data" />
-        <label for="mode_pac_script_data">PAC Script Data</label>
+        <label for="mode_pac_script_data" class="form-label">PAC Script Data</label>
         <textarea rows="5" placeholder="" name="pac_data" id="pac_data" class="form-control" aria-label="pac script data"></textarea>
         <div id="pac_drop">
             <label class="pac-file-label" for="pac_file">
@@ -37,31 +37,31 @@
     </li>
     <li class="form-group">
         <input type="radio" name="mode" value="fixed_servers" id="mode_fixed_servers" />
-        <label for="mode_fixed_servers">Fixed Servers</label>
+        <label for="mode_fixed_servers" class="form-label">Fixed Servers</label>
         <div class="input-group">
-            <label for="http_proxy" class="input-group-addon">HTTP Proxy</label>
+            <label for="http_proxy" class="input-group-text">HTTP Proxy</label>
             <input type="text" placeholder="e.g. 127.0.0.1:8080" name="http_proxy" id="http_proxy" class="form-control" />
         </div>
         <div class="input-group">
-            <label for="https_proxy" class="input-group-addon">HTTPS Proxy</label>
+            <label for="https_proxy" class="input-group-text">HTTPS Proxy</label>
             <input type="text" placeholder="e.g. 127.0.0.1:8443" name="https_proxy" id="https_proxy" class="form-control" />
         </div>
         <div class="input-group">
-            <label for="ftp_proxy" class="input-group-addon">FTP Proxy</label>
+            <label for="ftp_proxy" class="input-group-text">FTP Proxy</label>
             <input type="text" placeholder="e.g. 127.0.0.1:8021" name="ftp_proxy" id="ftp_proxy" class="form-control" />
         </div>
         <div class="input-group">
-            <label for="bypass_list" class="input-group-addon">Bypass List</label>
+            <label for="bypass_list" class="input-group-text">Bypass List</label>
             <input type="text" placeholder="Space separated list of hosts to bypass the proxy" name="bypass_list" id="bypass_list" class="form-control" />
         </div>
     </li>
     <li class="form-group">
         <input type="radio" name="mode" value="system" id="mode_system" />
-        <label for="mode_system">System</label>
+        <label for="mode_system" class="form-label">System</label>
     </li>
 </ul>
 <div id="footer">
-    <button class="btn btn-default btn-md" id="apply">Apply</button>
+    <button class="btn btn-outline-dark" id="apply">Apply</button>
 </div>
 </body>
 </html>
