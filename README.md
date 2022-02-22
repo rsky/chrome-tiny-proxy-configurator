@@ -55,7 +55,7 @@ foobar.com *foobar.com *.foobar.com *foobar.com:99 https://x.*.y.com:99
 
 [MIT License](LICENSE)
 
-Copyright (c) 2018 Ryusuke SEKIYAMA
+Copyright (c) 2018-2022 Ryusuke SEKIYAMA
 
 ## Credits
 
