@@ -1,7 +1,7 @@
 # Tiny Proxy Configurator
 A tiny and simple proxy configurator for Google Chrome.
 
-This extension is available in [Chrome Web Stor](https://chrome.google.com/webstore/detail/tiny-proxy-configurator/ilgignoiaacgbcagkcmfmbgnjbemedam).
+This extension is available in [Chrome Web Store](https://chrome.google.com/webstore/detail/tiny-proxy-configurator/ilgignoiaacgbcagkcmfmbgnjbemedam).
 
 ![options](readme/options.png)
 
