@@ -15,7 +15,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "esbuild": "^0.27.1",
+    "esbuild": "^0.28.1",
     "esbuild-jest": "0.4.0",
     "eslint": "^9.39.1",
     "eslint-plugin-jest": "^29.2.1",
